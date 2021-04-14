@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class Application {
 
     final private String fileName = "pudge.bin";
-    final private String resourcePath = "resource/translation/Translation";
+    final private String resourcePath = "Translation";
 
     private ResourceBundle resourceBundle;
     private Pudge pudge;

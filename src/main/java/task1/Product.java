@@ -6,17 +6,17 @@ public class Product {
     private String name;
     private int price;
 
-    Product() {
+    public Product() {
         name = "";
         price = 0;
     }
 
-    Product(Product product) {
+    public Product(Product product) {
         name = product.getName();
         price = product.getPrice();
     }
 
-    Product(String name, int price) {
+    public Product(String name, int price) {
         this.name = name;
         this.price = price;
     }

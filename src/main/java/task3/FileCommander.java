@@ -10,11 +10,11 @@ public class FileCommander {
 
     private File root;
 
-    FileCommander() {
+    public FileCommander() {
         root = new File(System.getProperty("user.dir"));
     }
 
-    FileCommander(File root) {
+    public FileCommander(File root) {
         this.root = root;
     }
 

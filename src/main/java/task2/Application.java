@@ -11,12 +11,12 @@ import java.util.Scanner;
 public class Application {
 
     final private String fileName = "pudge.bin";
-    final private String resourcePath = "Translation";
+    final private String resourcePath = "translation/Translation";
 
     private ResourceBundle resourceBundle;
     private Pudge pudge;
 
-    Application(String language, String country) {
+    public Application(String language, String country) {
         Locale lc = new Locale(language, country);
         try {
             resourceBundle = ResourceBundle.getBundle(resourcePath, lc);
@@ -34,7 +34,7 @@ public class Application {
         run();
     }
 
-    void run() {
+    public void run() {
         printMenu();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
@@ -65,7 +65,7 @@ public class Application {
         }
     }
 
-    void printMenu() {
+    public void printMenu() {
         System.out.println("--------------------------------------------------");
         System.out.println(resourceBundle.getString("menu_menu"));
         System.out.println("1. " + resourceBundle.getString("menu_create"));
@@ -74,14 +74,14 @@ public class Application {
         System.out.println("4. " + resourceBundle.getString("menu_exit"));
     }
 
-    void printPudge() {
+    public void printPudge() {
         if (pudge != null) {
             System.out.println("--------------------------------------------------");
             System.out.println("Object in memory: " + pudge.toString());
         }
     }
 
-    void actionCreate() {
+    public void actionCreate() {
         System.out.println("Enter pudge properties in format: int,int,int,string");
 
         Scanner sc = new Scanner(System.in);
@@ -108,7 +108,7 @@ public class Application {
         }
     }
 
-    void actionSave() {
+    public void actionSave() {
         if (pudge == null) {
             System.out.println("Nothing to save");
             return;
@@ -130,7 +130,7 @@ public class Application {
 
     }
 
-    void actionLoad() {
+    public void actionLoad() {
         try (
                 FileInputStream fis = new FileInputStream(new File(fileName));
                 ObjectInputStream ois = new ObjectInputStream(fis);

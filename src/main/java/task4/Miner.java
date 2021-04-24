@@ -1,9 +1,8 @@
 package task4;
 
-public class Miner implements Runnable {
-    private final int capacity = 3;
+import java.util.concurrent.TimeUnit;
 
-    private final int timeout = 1;
+public class Miner implements Runnable {
 
     private final String name;
 
@@ -19,15 +18,15 @@ public class Miner implements Runnable {
 
     @Override
     public void run() {
-        ThreadUtils.sleep(timeout);
-
         while (goldMine.hasGold) {
+            totalGold += goldMine.mineGold(3);
 
-            totalGold += goldMine.mineGold(capacity);
-
-            ThreadUtils.sleep(timeout);
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
-        System.out.println(toString());
     }
 
     @Override

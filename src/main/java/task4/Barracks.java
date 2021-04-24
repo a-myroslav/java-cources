@@ -1,26 +1,41 @@
 package task4;
 
+import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
+
 public class Barracks implements Runnable {
-    private final int timeout = 10;
-
-    private int minersAmount;
-
     private final GoldMine goldMine;
+
+    private ArrayList<Miner> miners = new ArrayList<>();
 
     public Barracks(GoldMine goldMine) {
         this.goldMine = goldMine;
         new Thread(this).start();
     }
 
+    public void addMiner(Miner miner) {
+        miners.add(miner);
+    }
+
+    public ArrayList<Miner> getMiners() {
+        return miners;
+    }
+
     @Override
     public void run() {
-        ThreadUtils.sleep(timeout);
+        for (int i = 1; i <= 5; i++) {
+            addMiner(new Miner("MINER " + i, goldMine));
+        }
 
         while (goldMine.hasGold) {
 
-            new Miner("YOUNG MINER " + ++minersAmount, goldMine);
+            addMiner(new Miner("MINER " + (miners.size() + 1), goldMine));
 
-            ThreadUtils.sleep(timeout);
+            try {
+                TimeUnit.SECONDS.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         System.out.println("Barracks are closed");

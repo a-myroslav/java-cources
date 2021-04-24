@@ -1,27 +1,23 @@
 package task4;
 
+import java.util.concurrent.TimeUnit;
+
 public class Main {
     public static void main(String[] args) {
 
-        GoldMine goldMine = new GoldMine(1000);
+        GoldMine goldMine = new GoldMine(100);
+        Barracks barracks = new Barracks(goldMine);
 
-        Thread mainTread = new Thread(() -> {
-            while (goldMine.hasGold) {
-
-                System.out.println(goldMine.toString());
-
-                ThreadUtils.sleep(1);
+        while (goldMine.hasGold) {
+            System.out.println(goldMine.toString());
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            System.out.println("GoldMine is empty.");
-        });
-
-        mainTread.setPriority(Thread.MAX_PRIORITY);
-        mainTread.start();
-
-        for (int i = 1; i <= 5; i++) {
-            new Miner("OLD MINER " + i, goldMine);
         }
 
-        new Barracks(goldMine);
+        barracks.getMiners().forEach(miner -> System.out.println(miner.toString()));
+
     }
 }
